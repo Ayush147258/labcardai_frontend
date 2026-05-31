@@ -6,7 +6,7 @@
 // Light theme: #FFFFFF bg, #0A1628 text, #00D4AA teal accent
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { Suspense, useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter, useSearchParams }               from 'next/navigation';
 import { pingBackend, BACKEND_URL }                    from '@/lib/backend';
 import Link                                         from 'next/link';
@@ -34,6 +34,14 @@ const LOADING_STEPS = [
 ];
 
 export default function UploadPage(): React.ReactElement {
+  return (
+    <Suspense fallback={null}>
+      <UploadPageContent />
+    </Suspense>
+  );
+}
+
+function UploadPageContent(): React.ReactElement {
   const router       = useRouter();
   const searchParams = useSearchParams();
 
